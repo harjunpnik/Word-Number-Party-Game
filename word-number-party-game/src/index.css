@@ -15,6 +15,23 @@ a:hover:not(.selected){
   background-color: #1a237e;
 }
 
+.button {
+  background-color: #1a237e; /* Green */
+  border: 1px solid #000051;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #534bae
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

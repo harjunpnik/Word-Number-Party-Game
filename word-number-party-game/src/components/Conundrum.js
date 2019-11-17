@@ -9,6 +9,8 @@ import eightWords from '../db/FI8.json'
 
 function Conundrum() {
 
+  let words = useRef([])
+
   const [letter1, setLetter1] = useState('?')
   const [letter2, setLetter2] = useState('?')
   const [letter3, setLetter3] = useState('?')
@@ -18,28 +20,70 @@ function Conundrum() {
   const [letter7, setLetter7] = useState('?')
   const [letter8, setLetter8] = useState('?')
 
-  const [answer, setAnswer] = useState('')
+  const [ansLetter1, setAnsLetter1] = useState('?') 
+  const [ansLetter2, setAnsLetter2] = useState('?')
+  const [ansLetter3, setAnsLetter3] = useState('?')
+  const [ansLetter4, setAnsLetter4] = useState('?')
+  const [ansLetter5, setAnsLetter5] = useState('?')
+  const [ansLetter6, setAnsLetter6] = useState('?')
+  const [ansLetter7, setAnsLetter7] = useState('?')
+  const [ansLetter8, setAnsLetter8] = useState('?')
 
-  let words = useRef([])
+  const [answer, setAnswer] = useState('????????')
 
-  const [visible, setVisible] = useState(false)
-  const hideWhenVisible = { display: visible ? '' : 'none' }
-  const toggleVisibility = () => {
-    setVisible(!visible)
+  const [showAnswer, setShowAnswer] = useState(false)
+
+  const toggleAnswer = () => {
+    setShowAnswer(!showAnswer)
+    showAnswer ? changeAnswer(answer) : changeAnswer(["?","?","?","?","?","?","?","?"])
   }
 
+  // Loads in all the eight letter words on content load
   useEffect(() => {
     let temp = []
     for (const key in eightWords){
       temp = temp.concat(eightWords[key])
-      //words = words.concat(eightWords[key])
-      //console.log(typeof words)
     }
     words.current = temp
-    console.log(words)
   }, [])
 
+  const getWord = () => {
+    // Reset previous answer
+    setShowAnswer(true)
+    changeAnswer(["?","?","?","?","?","?","?","?"])
+
+    // Caclulate out random word
+    const number = Math.floor(Math.random() * words.current.length )
+    const word = words.current[number].split('');
+    const n = word.length;
+
+    // Randomize letters
+    for(let i = n - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let tmp = word[i];
+        word[i] = word[j];
+        word[j] = tmp;
+    }
+    // Set letters and save answer
+    setLetters(words.current[number],word)
+  }
+  
+  const setLetters = (ans,scrambled) => {
+    setAnswer(ans)
+    setLetter1(scrambled[0])
+    setLetter2(scrambled[1])
+    setLetter3(scrambled[2])
+    setLetter4(scrambled[3])
+    setLetter5(scrambled[4])
+    setLetter6(scrambled[5])
+    setLetter7(scrambled[6])
+    setLetter8(scrambled[7])
+  }
+
   const resetWords = () => {
+    // Reset all letters and answer
+    setShowAnswer(true)
+    changeAnswer(["?","?","?","?","?","?","?","?"])
     setAnswer("????????")
     setLetter1("?")
     setLetter2("?")
@@ -51,57 +95,33 @@ function Conundrum() {
     setLetter8("?")
   }
 
-  const getWord = () => {
-    setVisible(false)
-    console.log(words.current.length)
-    const number = Math.floor(Math.random() * words.current.length )
-    console.log(number)
-    console.log(words.current[number])
-    const word = words.current[number].split('');
-    console.log(word)
-    const n = word.length;
-
-    for(let i = n - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let tmp = word[i];
-        word[i] = word[j];
-        word[j] = tmp;
-    }
-    console.log(word)
-
-    setLetters(words.current[number],word)
+  const changeAnswer = (answer) => {
+    // Update answer
+    setAnsLetter1(answer[0])
+    setAnsLetter2(answer[1])
+    setAnsLetter3(answer[2])
+    setAnsLetter4(answer[3])
+    setAnsLetter5(answer[4])
+    setAnsLetter6(answer[5])
+    setAnsLetter7(answer[6])
+    setAnsLetter8(answer[7])
   }
   
-  const setLetters = (ans,scramble) => {
-    //console.log(ans)
-    setAnswer(ans)
-    setLetter1(scramble[0])
-    setLetter2(scramble[1])
-    setLetter3(scramble[2])
-    setLetter4(scramble[3])
-    setLetter5(scramble[4])
-    setLetter6(scramble[5])
-    setLetter7(scramble[6])
-    setLetter8(scramble[7])
-  }
-  
-  const contentContainer = {width: "100%",padding: "10px", textAlign: "center"}
+  const contentContainer = {width: "100%",padding: "10px", textAlign: "center", marginTop: "5%"}
   const letterStyle = { width: "150px", height: "150px", margin: "10px",  borderStyle: "solid", borderWidth: "5px", borderColor: "#1b1b1b",  fontSize: "130px", textTransform: "uppercase", position: "relative", tranform: "translatey(-50%)"  }
   const flexStyle = {display: "flex", flexWrap: "nowrap", justifyContent: "center"}
 
   return (
     <div style={contentContainer}>      
 
-      <button onClick={getWord}>
+      <button class="button" onClick={getWord}>
         GET WORD
       </button>
-
-      <button onClick={resetWords}>
-        RESET
-      </button>
-
-      <button onClick={toggleVisibility}>
+      <button class="button" onClick={toggleAnswer}>
         SHOW ANSWER
+      </button>
+      <button class="button" onClick={resetWords}>
+        RESET
       </button>
 
       <div style={flexStyle}>
@@ -133,12 +153,35 @@ function Conundrum() {
 
       </div>
 
-      <br/>
-      
+      <div style={flexStyle}>
 
-      <div style={hideWhenVisible}>
-        {answer}
+        <div style={letterStyle}>
+          {ansLetter1}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter2}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter3}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter4}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter5}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter6}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter7}
+        </div>
+        <div style={letterStyle}>
+          {ansLetter8}
+        </div>
+
       </div>
+
     </div>
   )
 }
