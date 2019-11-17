@@ -1,8 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Conundrum from './components/Conundrum'
 import './index.css'
 
+
+// #1a237e blue highlight color
+// #1b1b1b Selected color
+// #424242 navbar color
 
 // TIME'S UP!
 
@@ -15,7 +19,7 @@ function App() {
   // This is mostly styling for the navbar and the container
   const headerStyle = {textAlign: "center", color: "white", fontSize: "80px", padding: "0", margin: "2px"}
 
-  const navbarStyle = {margin: "0", padding: "0", overflow: "hidden", backgroundColor:"#333",  top:"0", width: "100%", display:"block"}
+  const navbarStyle = {margin: "0", padding: "0", overflow: "hidden", backgroundColor:"#424242",  top:"0", width: "100%", display:"block"}
 
   const linkStyle = { padding: "14px 16px", display: "block", color: "white", textAlign: "center", textDecoration: "none" , borderRight: "1px solid #bbb"}
 
@@ -34,7 +38,7 @@ function App() {
             <div id="resp-links" style={ {borderTop: "2px solid #bbb"}} >
 
               <div style={adjustNavbar}>
-                <NavLink activeClassName="selected" style={linkStyle} to="/wordgame">Word Game</NavLink >
+                <NavLink exact activeClassName="selected" style={linkStyle} to="/">Word Game</NavLink >
               </div>
 
               <div style={adjustNavbar}>
@@ -57,7 +61,7 @@ function App() {
 
           </div>
           <div style={{display: "block"}}>
-            <Route exact path="/wordgame" render={() => <Conundrum />} />
+            <Route exact path="/" render={() => <Conundrum />} />
             <Route path="/numbers" render={() => <Conundrum />} />
             <Route path="/conundrum" render={() => <Conundrum />} />
             <Route path="/rules" render={() => <Conundrum />} />

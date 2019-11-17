@@ -8,7 +8,7 @@ body {
 }
 
 a:hover:not(.selected){
-  background-color: #111;
+  background-color: #1b1b1b;
 }
 
 .selected{

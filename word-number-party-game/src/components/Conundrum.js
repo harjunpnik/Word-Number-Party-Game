@@ -85,9 +85,12 @@ function Conundrum() {
     setLetter8(scramble[7])
   }
   
+  const contentContainer = {width: "100%",padding: "10px", textAlign: "center"}
+  const letterStyle = { width: "150px", height: "150px", margin: "10px",  borderStyle: "solid", borderWidth: "5px", borderColor: "#1b1b1b",  fontSize: "130px", textTransform: "uppercase", position: "relative", tranform: "translatey(-50%)"  }
+  const flexStyle = {display: "flex", flexWrap: "nowrap", justifyContent: "center"}
 
   return (
-    <div style={{margin: "auto",width: "50%",padding: "10px", fontSize: "150px", textAlign: "center"}}>      
+    <div style={contentContainer}>      
 
       <button onClick={getWord}>
         GET WORD
@@ -101,15 +104,34 @@ function Conundrum() {
         SHOW ANSWER
       </button>
 
-      <br/>
-      {letter1}
-      {letter2}
-      {letter3}
-      {letter4}
-      {letter5}
-      {letter6}
-      {letter7}
-      {letter8}
+      <div style={flexStyle}>
+
+        <div style={letterStyle}>
+          {letter1}
+        </div>
+        <div style={letterStyle}>
+          {letter2}
+        </div>
+        <div style={letterStyle}>
+          {letter3}
+        </div>
+        <div style={letterStyle}>
+          {letter4}
+        </div>
+        <div style={letterStyle}>
+          {letter5}
+        </div>
+        <div style={letterStyle}>
+          {letter6}
+        </div>
+        <div style={letterStyle}>
+          {letter7}
+        </div>
+        <div style={letterStyle}>
+          {letter8}
+        </div>
+
+      </div>
 
       <br/>
       
