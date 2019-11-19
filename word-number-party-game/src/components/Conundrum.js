@@ -1,4 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react'
+import Funcs from './functions'
 import eightWords from '../db/FI8.json'
 
 // TIME'S UP!
@@ -9,7 +10,7 @@ import eightWords from '../db/FI8.json'
 
 function Conundrum() {
 
-  let words = useRef([])
+  const words = useRef([])
 
   const [letter1, setLetter1] = useState('?')
   const [letter2, setLetter2] = useState('?')
@@ -40,11 +41,7 @@ function Conundrum() {
 
   // Loads in all the eight letter words on content load
   useEffect(() => {
-    let temp = []
-    for (const key in eightWords){
-      temp = temp.concat(eightWords[key])
-    }
-    words.current = temp
+    words.current = Funcs.loadInWords(eightWords)
   }, [])
 
   const getWord = () => {
@@ -107,20 +104,25 @@ function Conundrum() {
     setAnsLetter8(answer[7])
   }
   
-  const contentContainer = {width: "100%",padding: "10px", textAlign: "center", marginTop: "5%"}
+  // Mabye turn the elemnt into a map func
+
+  const contentContainer = {width: "100%", textAlign: "center"}
+  const headerStyle = {fontSize: "130px", margin: "0px"}
   const letterStyle = { width: "150px", height: "150px", margin: "10px",  borderStyle: "solid", borderWidth: "5px", borderColor: "#1b1b1b",  fontSize: "130px", textTransform: "uppercase", position: "relative", tranform: "translatey(-50%)"  }
   const flexStyle = {display: "flex", flexWrap: "nowrap", justifyContent: "center"}
 
   return (
     <div style={contentContainer}>      
 
-      <button class="button" onClick={getWord}>
+      <h1 style={headerStyle} >CONUNDRUM</h1>
+
+      <button className="button" onClick={getWord}>
         GET WORD
       </button>
-      <button class="button" onClick={toggleAnswer}>
+      <button className="button" onClick={toggleAnswer}>
         SHOW ANSWER
       </button>
-      <button class="button" onClick={resetWords}>
+      <button className="button" onClick={resetWords}>
         RESET
       </button>
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Conundrum from './components/Conundrum'
+import WordGame from './components/WordGame'
 import './index.css'
 
 
@@ -61,7 +62,7 @@ function App() {
 
           </div>
           <div style={{display: "block"}}>
-            <Route exact path="/" render={() => <Conundrum />} />
+            <Route exact path="/" render={() => <WordGame />} />
             <Route path="/numbers" render={() => <Conundrum />} />
             <Route path="/conundrum" render={() => <Conundrum />} />
             <Route path="/rules" render={() => <Conundrum />} />
