@@ -34,7 +34,13 @@ function WordGame() {
   const [letter7, setLetter7] = useState('?')
   const [letter8, setLetter8] = useState('?')
 
-  const [answers, setAnswers] = useState([])
+  const [answers2, setAnswers2] = useState([])
+  const [answers3, setAnswers3] = useState([])
+  const [answers4, setAnswers4] = useState([])
+  const [answers5, setAnswers5] = useState([])
+  const [answers6, setAnswers6] = useState([])
+  const [answers7, setAnswers7] = useState([])
+  const [answers8, setAnswers8] = useState([])
 
 
   // Loads in all the word json files
@@ -83,16 +89,13 @@ function WordGame() {
 
   const searchAnswers = () => {
     const currentLetters = [letter1, letter2, letter3, letter4, letter5, letter6, letter7, letter8]
-    let temp = []
-    temp = temp.concat(compareWordLists(currentLetters,words2.current))
-    temp = temp.concat(compareWordLists(currentLetters,words3.current))
-    temp = temp.concat(compareWordLists(currentLetters,words4.current))
-    temp = temp.concat(compareWordLists(currentLetters,words5.current))
-    temp = temp.concat(compareWordLists(currentLetters,words6.current))
-    temp = temp.concat(compareWordLists(currentLetters,words7.current))
-    temp = temp.concat(compareWordLists(currentLetters,words8.current))
-    
-    setAnswers(temp)
+    setAnswers2(compareWordLists(currentLetters,words2.current))
+    setAnswers3(compareWordLists(currentLetters,words3.current))
+    setAnswers4(compareWordLists(currentLetters,words4.current))
+    setAnswers5(compareWordLists(currentLetters,words5.current))
+    setAnswers6(compareWordLists(currentLetters,words6.current))
+    setAnswers7(compareWordLists(currentLetters,words7.current))
+    setAnswers8(compareWordLists(currentLetters,words8.current))
   }
   const assignLetters = (letter) => {
     if(letter1 === "?") setLetter1(letter)
@@ -116,7 +119,13 @@ function WordGame() {
   }
 
   const reset = () => {
-    setAnswers([])
+    setAnswers2([])
+    setAnswers3([])
+    setAnswers4([])
+    setAnswers5([])
+    setAnswers6([])
+    setAnswers7([])
+    setAnswers8([])
     setLetter1("?")
     setLetter2("?")
     setLetter3("?")
@@ -127,15 +136,25 @@ function WordGame() {
     setLetter8("?")
   }
 
-  const listAnswers = answers.reverse().map(ans => 
-  <ul key={ans}>{ans}</ul>  
-  )
 
-  
   const contentContainer = {width: "100%", textAlign: "center"}
   const headerStyle = {fontSize: "130px", margin: "0px"}
+
   const letterStyle = { width: "150px", height: "150px", margin: "10px",  borderStyle: "solid", borderWidth: "5px", borderColor: "#1b1b1b",  fontSize: "130px", textTransform: "uppercase", position: "relative", tranform: "translatey(-50%)"  }
   const flexStyle = {display: "flex", flexWrap: "nowrap", justifyContent: "center"}
+
+  const answerStyle = {width: "350px", margin: "10px",  borderStyle: "solid", borderWidth: "5px", borderColor: "#1b1b1b", borderRadius: "25px",  fontSize: "30px", textTransform: "uppercase", position: "relative", tranform: "translatey(-50%)"  }
+  const answerFlexStyle = {marginLeft: "5%", marginRight: "5%", display: "flex", justifyContent: "space-between", flexWrap: "nowrap"}
+  const answerText = {textAlign: "center", padding: "0px", fontSize: "25px", marginTop: "10px"}
+  const answerHeaderStyle = {marginTop: "2%", marginBottom: "0px", fontSize: "30px", margin: "5px", textDecoration: "underline"}
+  
+
+  const listAnswers = (list) => {
+    const items = list.sort().map(ans => 
+      <ul style={answerText} key={ans}>{ans}</ul>  
+    );
+    return items
+  }
 
   return (
     <div style={contentContainer}>      
@@ -180,6 +199,40 @@ function WordGame() {
         </div>
         <div style={letterStyle}>
           {letter8}
+        </div>
+
+      </div>
+
+
+      <h2 style={{marginTop: "2%", marginBottom: "0px", fontSize: "60px"}}>Answers</h2>
+      <div style={answerFlexStyle}>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>8 Letters</h3>
+          {listAnswers(answers8)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>7 Letters</h3>
+          {listAnswers(answers7)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>6 Letters</h3>
+          {listAnswers(answers6)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>5 Letters</h3>
+          {listAnswers(answers5)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>4 Letters</h3>
+          {listAnswers(answers4)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>3 Letters</h3>
+          {listAnswers(answers3)}
+        </div>
+        <div style={answerStyle}>
+          <h3 style={answerHeaderStyle}>2 Letters</h3>
+          {listAnswers(answers2)}
         </div>
 
       </div>
