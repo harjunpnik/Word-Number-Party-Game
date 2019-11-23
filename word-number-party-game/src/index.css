@@ -36,6 +36,10 @@ a:hover:not(.selected){
   background-color: #000051
 }
 
+.button:disabled {
+  background-color: #424242
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
